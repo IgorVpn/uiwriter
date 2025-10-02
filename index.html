@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Имя Автора - Писатель</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b8b8b8;
+            font-style: italic;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        nav a {
+            color: #ffd700;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #ffd700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .about {
+            text-align: center;
+            padding: 3rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .about img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffd700;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: 1rem auto;
+            font-size: 1.1rem;
+            color: #d0d0d0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-align: center;
+            margin: 3rem 0 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .book-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-card:nth-child(2) .book-cover {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .book-card:nth-child(3) .book-cover {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .book-title {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-genre {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-description {
+            color: #d0d0d0;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-links {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .buy-button {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a2e;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .buy-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+        }
+
+        .contact {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact a {
+            color: #ffd700;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 0 1rem;
+            transition: all 0.3s;
+        }
+
+        .contact a:hover {
+            color: #fff;
+            text-shadow: 0 0 10px #ffd700;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.4);
+            color: #999;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Имя Автора</h1>
+        <p class="tagline">Писатель. Создатель миров. Рассказчик историй.</p>
+    </header>
+
+    <nav>
+        <a href="#about">Обо мне</a>
+        <a href="#books">Мои книги</a>
+        <a href="#contact">Контакты</a>
+    </nav>
+
+    <div class="container">
+        <section id="about" class="about">
+            <img src="https://via.placeholder.com/200" alt="Фото автора">
+            <h2>Обо мне</h2>
+            <p>
+                Здравствуйте! Я писатель, который верит в силу слов и магию историй. 
+                Каждая моя книга — это путешествие в новый мир, где читатели могут найти 
+                вдохновение, приключения и глубокие эмоции.
+            </p>
+            <p>
+                Моя цель — создавать произведения, которые заставляют задуматься, 
+                переживать вместе с героями и открывать новые горизонты воображения.
+            </p>
+        </section>
+
+        <section id="books">
+            <h2>Мои книги</h2>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-cover">Обложка книги 1</div>
+                    <h3 class="book-title">Название первой книги</h3>
+                    <p class="book-genre">Жанр: Фантастика / Приключения</p>
+                    <p class="book-description">
+                        Захватывающая история о героях, которые отправляются в невероятное 
+                        путешествие через миры и времена. Книга, которая изменит ваше 
+                        представление о реальности.
+                    </p>
+                    <div class="book-links">
+                        <a href="#" class="buy-button">🛒 Лабиринт</a>
+                        <a href="#" class="buy-button">📚 Литрес</a>
+                        <a href="#" class="buy-button">📖 Ozon</a>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-cover">Обложка книги 2</div>
+                    <h3 class="book-title">Название второй книги</h3>
+                    <p class="book-genre">Жанр: Драма / Психологический роман</p>
+                    <p class="book-description">
+                        Глубокое погружение во внутренний мир персонажей, их страхи, 
+                        надежды и поиск смысла. История о том, что делает нас людьми.
+                    </p>
+                    <div class="book-links">
+                        <a href="#" class="buy-button">🛒 Лабиринт</a>
+                        <a href="#" class="buy-button">📚 Литрес</a>
+                        <a href="#" class="buy-button">📖 Ozon</a>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-cover">Обложка книги 3</div>
+                    <h3 class="book-title">Название третьей книги</h3>
+                    <p class="book-genre">Жанр: Детектив / Триллер</p>
+                    <p class="book-description">
+                        Запутанная история с неожиданными поворотами, которая держит 
+                        в напряжении до последней страницы. Сможете ли вы разгадать 
+                        тайну раньше героев?
+                    </p>
+                    <div class="book-links">
+                        <a href="#" class="buy-button">🛒 Лабиринт</a>
+                        <a href="#" class="buy-button">📚 Литрес</a>
+                        <a href="#" class="buy-button">📖 Ozon</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Связаться со мной</h2>
+            <p style="margin: 1.5rem 0;">
+                Хотите обсудить мои книги, задать вопрос или поделиться впечатлениями? 
+                Я всегда рад общению с читателями!
+            </p>
+            <div>
+                <a href="mailto:your.email@example.com">📧 Email</a>
+                <a href="#">📱 Telegram</a>
+                <a href="#">📘 ВКонтакте</a>
+                <a href="#">📷 Instagram</a>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Имя Автора. Все права защищены.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.querySelectorAll('.book-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
